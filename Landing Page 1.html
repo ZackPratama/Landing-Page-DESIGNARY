@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Security: Prevent clickjacking -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <!-- Security: Prevent content sniffing -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <!-- Security: Referrer policy -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <!-- Security: Prevent XSS in some browsers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';">
+    <!-- Security: Disable FLoC -->
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+    <title>Luxury Design Services - DESIGNARY</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cinzel', serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+        /* Custom scrollbar for modal */
+        #interior-detail::-webkit-scrollbar,
+        #interior-detail *::-webkit-scrollbar {
+            width: 10px;
+            background: #181818;
+        }
+        #interior-detail::-webkit-scrollbar-thumb,
+        #interior-detail *::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, #d4af37, #f9d423);
+            border-radius: 8px;
+        }
+        #interior-detail::-webkit-scrollbar-thumb:hover,
+        #interior-detail *::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+        #interior-detail::-webkit-scrollbar-track,
+        #interior-detail *::-webkit-scrollbar-track {
+            background: #181818;
+        }
+
+        body {
+            background-color: #141414;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .poster {
+            width: 100%;
+            max-width: 800px;
+            font-family: 'Cinzel', serif;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            color: white;
+            position: relative;
+        }
+
+        .gold-accent {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #d4af37, #f9d423, #d4af37);
+        }
+
+        .header {
+            padding: 40px 40px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo {
+            width: 260px;
+            height: 260px;
+            margin: 0 auto 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo i {
+            font-size: 50px;
+            color: #d4af37;
+        }
+
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #d4af37, #f9d423);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #d4af37;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 20px 40px;
+            opacity: 0.3;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 0 40px 40px;
+        }
+
+        .service-item {
+            background: #282828;
+            padding: 25px;
+            border-radius: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 3px solid #d4af37;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-icon {
+            color: #d4af37;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #d4af37;
+        }
+
+        .service-desc {
+            font-size: 0.95rem;
+            color: #b0b0b0;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            font-weight: 300;
+        }
+
+        .price {
+            font-size: 1.1rem;
+            color: #d4af37;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .cta-section {
+            background: #282828;
+            padding: 30px 40px;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        .cta-title {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #d4af37;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+
+        .contact-item i {
+            color: #d4af37;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, #d4af37, #f9d423);
+            color: #141414;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid #d4af37;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #d4af37;
+            font-weight: 300;
+        }
+
+        @media (max-width: 768px) {
+            .services {
+                grid-template-columns: 1fr;
+                gap: 14px;
+                padding: 0 10px 24px;
+            }
+            h1 {
+                font-size: 1.3rem;
+            }
+            .header {
+                padding: 18px 10px 12px;
+            }
+            .logo {
+                width: 120px !important;
+                height: 120px !important;
+                margin-bottom: 18px !important;
+            }
+            .tagline {
+                font-size: 0.95rem;
+                margin-bottom: 16px;
+            }
+            .service-title {
+                font-size: 1.05rem;
+            }
+            .service-desc {
+                font-size: 0.85rem;
+            }
+            .price {
+                font-size: 0.95rem;
+                padding: 7px 14px !important;
+            }
+            .cta-section {
+                padding: 18px 10px;
+            }
+            .cta-title {
+                font-size: 1.05rem;
+            }
+            .footer {
+                font-size: 0.8rem;
+                padding: 10px;
+            }
+            /* Modal adjustments for mobile */
+            #interior-detail > div,
+            #logo-detail > div,
+            #web-detail > div,
+            #uiux-detail > div {
+                padding: 18px 6px 16px !important;
+                max-width: 98vw !important;
+                font-size: 0.93rem !important;
+            }
+            #interior-detail h2,
+            #logo-detail h2,
+            #web-detail h2,
+            #uiux-detail h2 {
+                font-size: 1.05rem !important;
+            }
+            #interior-detail ul,
+            #logo-detail ul,
+            #web-detail ul,
+            #uiux-detail ul {
+                font-size: 0.9rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <div class="gold-accent"></div>
+        
+        <div class="header">
+            <div class="logo" style="width:260px; height:260px; margin:0 auto 32px;">
+                <img src="Logo Baru.png" alt="Logo PT" style="width: 100%; height: 100%; object-fit: contain; display: block;" />
+            </div>
+            <div class="tagline">Premium Design Solutions for Distinguished Clients</div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="services">
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <div class="service-title">Pembuatan Website</div>
+                <div class="service-desc">Website profesional yang responsif dengan desain custom untuk kebutuhan bisnis Anda.</div>
+                <a class="price" href="#web-detail" style="display:inline-block; background:linear-gradient(to right,#d4af37,#f9d423); color:#141414; padding:8px 22px; border-radius:30px; font-weight:700; text-decoration:none; font-size:1.05rem; margin-top:8px; transition:all 0.2s; border:2px solid #d4af37; text-align:center;">Lihat Detail</a>
+            </div>
+            
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="fas fa-couch"></i>
+                </div>
+                <div class="service-title">Design Interior & Eksterior</div>
+                <div class="service-desc">Solusi desain lengkap untuk hunian dan komersial dengan konsep modern dan luxury.</div>
+                <a class="price" href="#interior-detail" style="display:inline-block; background:linear-gradient(to right,#d4af37,#f9d423); color:#141414; padding:8px 22px; border-radius:30px; font-weight:700; text-decoration:none; font-size:1.05rem; margin-top:8px; transition:all 0.2s; border:2px solid #d4af37; text-align:center;">Lihat Detail</a>
+            </div>
+            
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="fas fa-signature"></i>
+                </div>
+                <div class="service-title">Design Logo & Branding</div>
+                <div class="service-desc">Identitas visual premium termasuk logo, warna merek, dan guideline branding lengkap.</div>
+                <a class="price" href="#logo-detail" style="display:inline-block; background:linear-gradient(to right,#d4af37,#f9d423); color:#141414; padding:8px 22px; border-radius:30px; font-weight:700; text-decoration:none; font-size:1.05rem; margin-top:8px; transition:all 0.2s; border:2px solid #d4af37; text-align:center;">Lihat Detail</a>
+            </div>
+            
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="service-title">UI/UX Design</div>
+                <div class="service-desc">Pengalaman pengguna terbaik dengan desain antarmuka yang intuitif dan estetik.</div>
+                <a class="price" href="#uiux-detail" style="display:inline-block; background:linear-gradient(to right,#d4af37,#f9d423); color:#141414; padding:8px 22px; border-radius:30px; font-weight:700; text-decoration:none; font-size:1.05rem; margin-top:8px; transition:all 0.2s; border:2px solid #d4af37; text-align:center;">Lihat Detail</a>
+            </div>
+        </div>
+        
+        <!-- Modal Detail Interior & Eksterior -->
+        <div id="interior-detail" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(20,20,20,0.92); justify-content:center; align-items:center;">
+            <div style="background:#181818; border-radius:18px; max-width:420px; width:92vw; margin:auto; box-shadow:0 12px 32px rgba(0,0,0,0.45); padding:36px 24px 28px; color:#fff; font-family:'Cinzel',serif; position:relative; max-height:90vh; overflow-y:auto;">
+                <a href="#" style="position:absolute; top:18px; right:22px; color:#d4af37; font-size:1.5rem; text-decoration:none; font-weight:700;">&times;</a>
+                <h2 style="color:#d4af37; font-size:1.25rem; margin-bottom:8px; font-weight:700; letter-spacing:1px;">Layanan Desain Interior & Eksterior</h2>
+                <div style="font-size:1.05rem; color:#fff; margin-bottom:18px; font-weight:500;">Solusi Visual Premium untuk Hunian dan Komersial</div>
+                <div style="margin-bottom:18px;">
+                    <b style="color:#d4af37;">Paket Basic</b><br>
+                    <span style="color:#d4af37; font-weight:600;">Rp 50.000 – Rp 100.000/m²</span>
+                    <ul style="margin:8px 0 0 18px; color:#fff; font-size:0.98rem;">
+                        <li>Perencanaan tata letak (layout 2D)</li>
+                        <li>Panduan material & warna sederhana</li>
+                        <li>1x revisi minor</li>
+                    </ul>
+                    <div style="margin:8px 0 0 0; color:#b0b0b0; font-size:0.97rem;">Cocok untuk klien yang membutuhkan panduan fungsional dengan anggaran efisien.</div>
+                </div>
+                <div style="margin-bottom:18px;">
+                    <b style="color:#d4af37;">Paket Profesional</b><br>
+                    <span style="color:#d4af37; font-weight:600;">Rp 100.000 – Rp 200.000/m²</span>
+                    <ul style="margin:8px 0 0 18px; color:#fff; font-size:0.98rem;">
+                        <li>Visualisasi 3D realistis</li>
+                        <li>Perencanaan layout terstruktur</li>
+                        <li>Panduan material, warna, dan furnitur</li>
+                        <li>Rencana Anggaran Biaya (RAB) standar</li>
+                        <li>2x revisi desain</li>
+                    </ul>
+                    <div style="margin:8px 0 0 0; color:#b0b0b0; font-size:0.97rem;">Ideal untuk rumah tinggal, ruko, atau ruang usaha dengan tampilan profesional.</div>
+                </div>
+                <div style="margin-bottom:18px;">
+                    <b style="color:#d4af37;">Paket Premium</b><br>
+                    <span style="color:#d4af37; font-weight:600;">Rp 200.000 – Rp 250.000/m²</span>
+                    <ul style="margin:8px 0 0 18px; color:#fff; font-size:0.98rem;">
+                        <li>Desain 2D & 3D high-detail (realistis)</li>
+                        <li>Panduan material eksklusif, lighting, dan dekorasi</li>
+                        <li>RAB lengkap & estimasi pelaksanaan proyek</li>
+                        <li>3x revisi desain + konsultasi intensif</li>
+                        <li>Tersedia kunjungan lokasi*</li>
+                    </ul>
+                    <div style="margin:8px 0 0 0; color:#b0b0b0; font-size:0.97rem;">Dikhususkan untuk proyek high-end seperti hunian mewah, villa, atau bangunan komersial prestisius.</div>
+                </div>
+                <div style="color:#b0b0b0; font-size:0.95rem; margin-top:10px;">*Khusus area yang terjangkau atau sesuai kesepakatan</div>
+            </div>
+        </div>
+
+        <!-- Modal Detail Logo & Branding -->
+        <div id="logo-detail" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(20,20,20,0.92); justify-content:center; align-items:center;">
+            <div style="background:#181818; border-radius:18px; max-width:420px; width:92vw; margin:auto; box-shadow:0 12px 32px rgba(0,0,0,0.45); padding:36px 24px 28px; color:#fff; font-family:'Cinzel',serif; position:relative; max-height:90vh; overflow-y:auto;">
+                <a href="#" style="position:absolute; top:18px; right:22px; color:#d4af37; font-size:1.5rem; text-decoration:none; font-weight:700;">&times;</a>
+                <h2 style="color:#d4af37; font-size:1.25rem; margin-bottom:8px; font-weight:700; letter-spacing:1px;">Layanan Desain Logo & Identitas Brand</h2>
+                <div style="font-size:1.05rem; color:#fff; margin-bottom:18px; font-weight:500;">Membangun Citra Bisnis yang Kuat & Berkelas</div>
+                <div style="margin-bottom:18px;">
+                    <b style="color:#d4af37;">Paket Basic</b><br>
+                    <span style="color:#d4af37; font-weight:600;">Rp 150.000</span>
+                    <ul style="margin:8px 0 0 18px; color:#fff; font-size:0.98rem;">
+                        <li>1 konsep logo sederhana</li>
+                        <li>1x revisi</li>
+                        <li>Format PNG & JPG resolusi tinggi</li>
+                    </ul>
+                    <div style="margin:8px 0 0 0; color:#b0b0b0; font-size:0.97rem;">Cocok untuk UMKM, usaha rintisan, atau personal branding awal.<br>Solusi hemat untuk kebutuhan logo personal atau bisnis kecil.</div>
+                </div>
+                <div style="margin-bottom:18px;">
+                    <b style="color:#d4af37;">Paket Profesional</b><br>
+                    <span style="color:#d4af37; font-weight:600;">Rp 750.000 – Rp 1.500.000</span>
+                    <ul style="margin:8px 0 0 18px; color:#fff; font-size:0.98rem;">
+                        <li>2–3 konsep logo pilihan</li>
+                        <li>3x revisi</li>
+                        <li>Format lengkap (PNG, JPG, PDF, SVG)</li>
+                        <li>Mini brand guideline (warna, font, layout)</li>
+                        <li>Mockup penggunaan (kartu nama, kaos, signage)</li>
+                    </ul>
+                    <div style="margin:8px 0 0 0; color:#b0b0b0; font-size:0.97rem;">Ideal untuk bisnis yang sedang tumbuh dan ingin tampil kredibel.<br>Untuk brand yang ingin tampil lebih kuat dan konsisten.</div>
+                </div>
+                <div style="margin-bottom:18px;">
+                    <b style="color:#d4af37;">Paket Eksklusif + Siap HAKI</b><br>
+                    <span style="color:#d4af37; font-weight:600;">Rp 3.000.000 – Rp 5.000.000</span>
+                    <ul style="margin:8px 0 0 18px; color:#fff; font-size:0.98rem;">
+                        <li>Desain logo eksklusif (3+ konsep strategis)</li>
+                        <li>Proses kreatif berbasis riset & positioning brand</li>
+                        <li>Unlimited revisi minor</li>
+                        <li>Full Brand Guidelines (warna, font, rules, penggunaan)</li>
+                        <li>File master (AI, EPS, PDF, SVG, PNG, JPG)</li>
+                        <li>Mockup premium</li>
+                        <li>Konsultasi & pendampingan HAKI*</li>
+                    </ul>
+                    <div style="margin:8px 0 0 0; color:#b0b0b0; font-size:0.97rem;">Layanan premium dengan pendekatan branding menyeluruh dan siap daftarkan HAKI.</div>
+                </div>
+                <div style="color:#b0b0b0; font-size:0.95rem; margin-top:10px;">*Pendaftaran HAKI dapat difasilitasi dengan biaya terpisah</div>
+            </div>
+        </div>
+
+        <!-- Modal Detail Pembuatan Website -->
+        <div id="web-detail" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(20,20,20,0.92); justify-content:center; align-items:center;">
+            <div style="background:#181818; border-radius:18px; max-width:420px; width:92vw; margin:auto; box-shadow:0 12px 32px rgba(0,0,0,0.45); padding:36px 24px 28px; color:#fff; font-family:'Cinzel',serif; position:relative; max-height:90vh; overflow-y:auto;">
+                <a href="#" style="position:absolute; top:18px; right:22px; color:#d4af37; font-size:1.5rem; text-decoration:none; font-weight:700;">&times;</a>
+                <h2 style="color:#d4af37; font-size:1.25rem; margin-bottom:8px; font-weight:700; letter-spacing:1px;">Layanan Pembuatan Website</h2>
+                <div style="font-size:1.05rem; color:#fff; margin-bottom:18px; font-weight:500;">Website Modern, Responsif & Siap Membawa Bisnismu Naik Level</div>
+                <div style="margin-bottom:18px;">
+                    <b style="color:#d4af37;">Paket Starter</b><br>
+                    <span style="color:#d4af37; font-weight:600;">Rp 1.000.000 – Rp 2.500.000</span>
+                    <ul style="margin:8px 0 0 18px; color:#fff; font-size:0.98rem;">
+                        <li>Landing page 1–2 section</li>
+                        <li>Desain responsif (HP & Desktop)</li>
+                        <li>Domain + Hosting 1 tahun*</li>
+                        <li>1x revisi</li>
+                    </ul>
+                    <div style="margin:8px 0 0 0; color:#b0b0b0; font-size:0.97rem;">Cocok untuk portofolio, profil pribadi, atau usaha mikro.<br>Solusi tepat untuk kehadiran digital awal yang profesional.</div>
+                </div>
+                <div style="margin-bottom:18px;">
+                    <b style="color:#d4af37;">Paket Bisnis</b><br>
+                    <span style="color:#d4af37; font-weight:600;">Rp 3.000.000 – Rp 6.000.000</span>
+                    <ul style="margin:8px 0 0 18px; color:#fff; font-size:0.98rem;">
+                        <li>3–5 halaman (Home, About, Services, Gallery, Contact)</li>
+                        <li>Desain eksklusif & UI/UX friendly</li>
+                        <li>Formulir kontak / pemesanan</li>
+                        <li>Integrasi WhatsApp / Maps / Sosial Media</li>
+                        <li>2x revisi</li>
+                        <li>Domain & hosting 1 tahun</li>
+                    </ul>
+                    <div style="margin:8px 0 0 0; color:#b0b0b0; font-size:0.97rem;">Ideal untuk company profile, jasa profesional, atau UMKM berkembang.<br>Website informatif untuk usaha kecil hingga menengah.</div>
+                </div>
+                <div style="margin-bottom:18px;">
+                    <b style="color:#d4af37;">Paket E-Commerce / Custom System</b><br>
+                    <span style="color:#d4af37; font-weight:600;">Rp 6.000.000 – Rp 15.000.000+</span>
+                    <ul style="margin:8px 0 0 18px; color:#fff; font-size:0.98rem;">
+                        <li>Sistem toko online (keranjang, checkout, dashboard admin)</li>
+                        <li>Fitur custom (login, database, NFC, dsb.)</li>
+                        <li>Desain full custom + optimalisasi kecepatan</li>
+                        <li>Integrasi pembayaran, notifikasi email, dsb.</li>
+                        <li>Dashboard pengelolaan konten</li>
+                        <li>3x revisi + dokumentasi</li>
+                    </ul>
+                    <div style="margin:8px 0 0 0; color:#b0b0b0; font-size:0.97rem;">Cocok untuk bisnis digital, startup, atau sistem berbasis web internal.<br>Untuk bisnis yang membutuhkan fitur dinamis dan sistem backend.</div>
+                </div>
+                <div style="color:#b0b0b0; font-size:0.95rem; margin-top:10px;">*Harga domain dan hosting dapat disesuaikan dengan paket</div>
+            </div>
+        </div>
+
+        <!-- Modal Detail UI/UX Design -->
+        <div id="uiux-detail" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(20,20,20,0.92); justify-content:center; align-items:center;">
+            <div style="background:#181818; border-radius:18px; max-width:420px; width:92vw; margin:auto; box-shadow:0 12px 32px rgba(0,0,0,0.45); padding:36px 24px 28px; color:#fff; font-family:'Cinzel',serif; position:relative; max-height:90vh; overflow-y:auto;">
+                <a href="#" style="position:absolute; top:18px; right:22px; color:#d4af37; font-size:1.5rem; text-decoration:none; font-weight:700;">&times;</a>
+                <h2 style="color:#d4af37; font-size:1.25rem; margin-bottom:8px; font-weight:700; letter-spacing:1px;">Layanan UI/UX Design</h2>
+                <div style="font-size:1.05rem; color:#fff; margin-bottom:18px; font-weight:500;">Desain Antarmuka & Pengalaman Pengguna yang Fungsional, Modern, dan Estetis</div>
+                <div style="margin-bottom:18px;">
+                    <b style="color:#d4af37;">Paket UI Design Saja</b><br>
+                    <span style="color:#d4af37; font-weight:600;">Rp 300.000 – Rp 1.500.000 / layar (screen)</span>
+                    <ul style="margin:8px 0 0 18px; color:#fff; font-size:0.98rem;">
+                        <li>Desain full-HD & responsif (mobile/desktop)</li>
+                        <li>File Figma/Adobe XD siap development</li>
+                        <li>Komponen desain & layout konsisten</li>
+                        <li>1–2x revisi minor</li>
+                    </ul>
+                    <div style="margin:8px 0 0 0; color:#b0b0b0; font-size:0.97rem;">Desain visual antarmuka aplikasi atau website tanpa wireframe atau UX research.</div>
+                </div>
+                <div style="margin-bottom:18px;">
+                    <b style="color:#d4af37;">Paket UI/UX Lengkap</b><br>
+                    <span style="color:#d4af37; font-weight:600;">Rp 2.500.000 – Rp 10.000.000 / project</span>
+                    <ul style="margin:8px 0 0 18px; color:#fff; font-size:0.98rem;">
+                        <li>Research singkat (audience, persona, goal)</li>
+                        <li>User Flow & Wireframe</li>
+                        <li>Desain UI final (Figma/Adobe XD)</li>
+                        <li>Interactive Prototype</li>
+                        <li>Design System (komponen, warna, font)</li>
+                        <li>2–3x revisi + dokumentasi</li>
+                    </ul>
+                    <div style="margin:8px 0 0 0; color:#b0b0b0; font-size:0.97rem;">Cocok untuk aplikasi startup, web sistem, dashboard admin, atau produk digital baru.<br>Pendekatan menyeluruh dengan pengalaman pengguna yang dirancang strategis.</div>
+                </div>
+                <div style="margin-bottom:18px;">
+                    <b style="color:#d4af37;">Paket Enterprise / Produk Digital Premium</b><br>
+                    <span style="color:#d4af37; font-weight:600;">Mulai dari Rp 15.000.000+ / project</span>
+                    <ul style="margin:8px 0 0 18px; color:#fff; font-size:0.98rem;">
+                        <li>Stakeholder interview & UX Research</li>
+                        <li>Empathy Map, Persona, Journey Map</li>
+                        <li>Wireframe skala besar + desain UI High Fidelity</li>
+                        <li>Design System & dokumentasi untuk developer</li>
+                        <li>Kolaborasi bersama tim dev/produk</li>
+                        <li>Revisi tidak dibatasi secara minor</li>
+                    </ul>
+                    <div style="margin:8px 0 0 0; color:#b0b0b0; font-size:0.97rem;">Desain menyeluruh berbasis riset mendalam, dengan pendekatan product thinking.</div>
+                </div>
+            </div>
+        </div>
+        <div class="cta-section">
+            <div class="cta-title">Siap Mewujudkan Konsep Anda?</div>
+            <a href="konsultasi.html" class="cta-button">Konsultasi Gratis Sekarang</a>
+        </div>
+        <script>
+        // Modal popup logic for all service details
+        document.addEventListener('DOMContentLoaded', function() {
+          function setupModal(modalId, triggerSelector) {
+            var modal = document.getElementById(modalId);
+            var openBtn = document.querySelector(triggerSelector);
+            var closeBtn = modal ? modal.querySelector('a[href="#"]') : null;
+            if(openBtn && modal && closeBtn) {
+              openBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+              });
+              closeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+              });
+              // Close modal on outside click
+              modal.addEventListener('click', function(e) {
+                if(e.target === modal) {
+                  modal.style.display = 'none';
+                  document.body.style.overflow = '';
+                }
+              });
+            }
+          }
+          setupModal('interior-detail', 'a.price[href="#interior-detail"]');
+          setupModal('logo-detail', 'a.price[href="#logo-detail"]');
+          setupModal('web-detail', 'a.price[href="#web-detail"]');
+          setupModal('uiux-detail', 'a.price[href="#uiux-detail"]');
+        });
+        </script>
+        
+        <div class="footer">
+            © 2023 DESIGNARY. All Rights Reserved.
+        </div>
+    </div>
+</body>
+</html>
