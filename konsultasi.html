@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konsultasi Sekarang - DESIGNARY</title>
+    <style>
+        body {
+            background-color: #141414;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Cinzel', serif;
+            margin: 0;
+        }
+        .konsultasi-container {
+            background: #1a1a1a;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            padding: 48px 32px 32px;
+            max-width: 420px;
+            width: 100%;
+        }
+        .konsultasi-container h2 {
+            color: #d4af37;
+            font-size: 1.7rem;
+            text-align: center;
+            margin-bottom: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        input, textarea {
+            padding: 14px 18px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            background: #222;
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+        }
+        textarea {
+            resize: vertical;
+        }
+        button[type="submit"] {
+            background: linear-gradient(to right,#d4af37,#f9d423);
+            color: #141414;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 0;
+            font-size: 1.1rem;
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button[type="submit"]:hover {
+            box-shadow: 0 8px 18px rgba(212,175,55,0.18);
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 24px;
+            color: #d4af37;
+            text-decoration: underline;
+            font-size: 1rem;
+            font-family: 'Cinzel', serif;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="konsultasi-container">
+        <h2>Konsultasikan Sekarang</h2>
+        <form action="https://formspree.io/f/xyzpevej" method="POST" id="konsultasiForm" autocomplete="off">
+            <input type="text" name="nama" placeholder="Nama Anda" required>
+            <input type="email" name="email" placeholder="Email Aktif" required>
+            <select name="layanan" required style="padding:14px 18px; border-radius:8px; border:1px solid #444; background:#222; color:#fff; font-family:'Cinzel', serif; font-size:1rem;">
+                <option value="" disabled selected>Pilih Layanan</option>
+                <option value="website">Pembuatan Website</option>
+                <option value="interior">Design Interior & Eksterior</option>
+                <option value="branding">Design Logo & Branding</option>
+                <option value="uiux">UI/UX Design</option>
+                <option value="lainnya">Lainnya</option>
+            </select>
+            <textarea name="pesan" placeholder="Ceritakan kebutuhan desain Anda..." rows="4" required></textarea>
+            <button type="submit">Kirim Konsultasi</button>
+            <div id="form-success" style="display:none; color:#d4af37; background:#232323; border-radius:8px; padding:18px 12px; margin-top:18px; text-align:center; font-size:1.05rem; font-family:'Cinzel',serif; font-weight:600; letter-spacing:0.5px;">Terima kasih, konsultasi Anda sudah terkirim! Kami akan segera menghubungi Anda secara profesional.</div>
+        </form>
+        <div style="margin-top:18px; color:#d4af37; background:#232323; border-radius:8px; padding:12px 10px; text-align:center; font-size:0.98rem; font-family:'Cinzel',serif; font-weight:500; letter-spacing:0.2px;">
+            <b>Catatan:</b> <span style="color:#fff; font-weight:400;">MOHON SERTAKAN NOMOR WHATSAPP agar tim kami dapat menghubungi Anda lebih lanjut melalui WhatsApp.</span>
+        </div>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var form = document.getElementById('konsultasiForm');
+          var successMsg = document.getElementById('form-success');
+          if(form) {
+            form.addEventListener('submit', function(e) {
+              e.preventDefault();
+              var xhr = new XMLHttpRequest();
+              xhr.open('POST', form.action);
+              xhr.setRequestHeader('Accept', 'application/json');
+              var formData = new FormData(form);
+              xhr.onreadystatechange = function() {
+                if(xhr.readyState === 4) {
+                  if(xhr.status === 200) {
+                    form.reset();
+                    successMsg.style.display = 'block';
+                  } else {
+                    successMsg.style.display = 'block';
+                    successMsg.style.color = '#ff4d4d';
+                    successMsg.innerText = 'Maaf, terjadi kesalahan. Silakan coba lagi atau hubungi kami langsung.';
+                  }
+                }
+              };
+              xhr.send(formData);
+            });
+          }
+        });
+        </script>
+        <a href="code (1).html" class="back-link">&#8592; Kembali ke Beranda</a>
+    </div>
+</body>
+</html>
